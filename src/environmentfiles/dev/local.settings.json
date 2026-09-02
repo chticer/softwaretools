@@ -1,0 +1,22 @@
+{
+    "_comment": "Place this file in / and replace all instances of [placeholder]",
+    "IsEncrypted": false,
+    "Values":
+    {
+        "_comment":
+        {
+            "APPLICATIONINSIGHTS_CONNECTION_STRING": "Required, specifies the connection string for Application Insights",
+            "AzureWebJobsStorage": "Required, specifies the connection string of web jobs for Storage",
+            "FUNCTIONS_WORKER_RUNTIME": "Required, specifies the value of the worker runtime for Functions",
+            "MONGODB_URI": "Required, specifies the URI connection string for MongoDB",
+            "ServiceBusConnection__fullyQualifiedNamespace": "Required, specifies the fully qualified namespace with Visual Studio Code account authentication for Service Bus",
+            "ServiceBusConnection__tenantId": "Required, specifies the tenant ID with Visual Studio Code account authentication for Service Bus"
+        },
+        "APPLICATIONINSIGHTS_CONNECTION_STRING": "[placeholder]",
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "MONGODB_URI": "[placeholder]",
+        "ServiceBusConnection__fullyQualifiedNamespace": "[placeholder]",
+        "ServiceBusConnection__tenantId": "0c5b36ec-d351-4e12-9d18-2a6a720000dc"
+    }
+}
