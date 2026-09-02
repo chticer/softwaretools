@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "cron"
+      cronjob: "30 0 * * 2"
+    groups:
+      deps:
+        patterns:
+          - "actions/*"
+      tools:
+        patterns:
+          - "Azure/*"
+    commit-message:
+      prefix: "[GitHub Actions Dependency Update]"
+    open-pull-requests-limit: 10
+    target-branch: "github-actions"
+    labels:
+      - "github-actions"
+      - "dependabot"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "cron"
+      cronjob: "30 12 * * 2"
+    groups:
+      deps:
+        patterns:
+          - "@azure/*"
+          - "applicationinsights"
+          - "mongoose"
+    commit-message:
+      prefix: "[npm Dependency Update]"
+    open-pull-requests-limit: 10
+    target-branch: "dev"
+    labels:
+      - "npm"
+      - "dependabot"

@@ -1,0 +1,50 @@
+name: Updates (main branch)
+
+on:
+    pull_request:
+        types:
+            - closed
+        branches:
+            - main
+    workflow_dispatch:
+
+env:
+    AZURE_FUNCTIONAPP_NAME: secretply-softwaretools
+    AZURE_FUNCTIONAPP_PACKAGE_PATH: "."
+    NODE_VERSION: "24.x"
+    BRANCH_NAME: "main"
+
+permissions:
+    contents: read
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        environment:
+            name: "Production"
+        steps:
+            - uses: actions/checkout@v7
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v7
+              with:
+                node-version: ${{ env.NODE_VERSION }}
+                cache: "npm"
+                cache-dependency-path: package-lock.json
+
+            - name: npm install, build, and test
+              run: |
+                npm install --ignore-scripts
+                npm run build --if-present
+                npm run test --if-present
+
+            - name: Deploy to Azure Function
+              uses: Azure/functions-action@v1
+              id: deploy-to-functionapp
+              if: github.actor != 'dependabot[bot]'
+              with:
+                app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+                publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_MAIN }}
+                package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+                sku: flexconsumption
+                remote-build: true
