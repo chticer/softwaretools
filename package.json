@@ -9,7 +9,7 @@
     "dependencies": {
         "@azure/functions": "^4.0.0",
         "applicationinsights": "^3.16.0",
-        "mongoose": "^9.9.5"
+        "mongoose": "^9.10.0"
     },
     "main": "src/{index.js,functions/*.js}"
 }
