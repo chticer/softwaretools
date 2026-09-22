@@ -7,9 +7,9 @@
     },
     "type": "module",
     "dependencies": {
-        "@azure/functions": "^4.0.0",
+        "@azure/functions": "^4.16.5",
         "applicationinsights": "^3.16.0",
-        "mongoose": "^9.10.0"
+        "mongoose": "^9.10.1"
     },
     "main": "src/{index.js,functions/*.js}"
 }
