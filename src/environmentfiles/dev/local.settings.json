@@ -1,22 +1,37 @@
 {
-    "_comment": "Place this file in / and replace all instances of [placeholder]",
+    "_comment":
+    {
+        "::": "Place this file in / and replace all instances of [placeholder]",
+        "Values::APPLICATIONINSIGHTS_CONNECTION_STRING": "Required, specifies the connection string for Application Insights",
+        "Values::AzureWebJobsStorage": "Required, specifies the connection string of web jobs for Storage",
+        "Values::FUNCTIONS_WORKER_RUNTIME": "Required, specifies the value of the worker runtime for Functions",
+        "Values::IGDB_API_ACCESS_TOKEN": "Required, specifies the access token for the IGDB API",
+        "Values::IGDB_API_CLIENT_ID": "Required, specifies the client ID for the IGDB API",
+        "Values::MONGODB_URI": "Required, specifies the URI connection string for MongoDB (use {database-placeholder} instead of specifying a database name)",
+        "Values::ServiceBusConnection": "Required, specifies the shared access signature with send and listen claims for Service Bus",
+        "Values::SERVICE_BUS_NAMESPACE": "Required, specifies the namespace for Service Bus",
+        "Values::SERVICE_BUS_QUEUE_NAME_IGDB_API_WEBHOOK": "Required, specifies the queue name of IGDB API webhook for Service Bus",
+        "Values::WEBHOOK_CALLBACK_URL": "Required, specifies the callback URL for webhooks",
+        "Host::LocalHttpPort": "Optional, specifies the HTTP port"
+    },
     "IsEncrypted": false,
     "Values":
     {
-        "_comment":
-        {
-            "APPLICATIONINSIGHTS_CONNECTION_STRING": "Required, specifies the connection string for Application Insights",
-            "AzureWebJobsStorage": "Required, specifies the connection string of web jobs for Storage",
-            "FUNCTIONS_WORKER_RUNTIME": "Required, specifies the value of the worker runtime for Functions",
-            "MONGODB_URI": "Required, specifies the URI connection string for MongoDB",
-            "ServiceBusConnection__fullyQualifiedNamespace": "Required, specifies the fully qualified namespace with Visual Studio Code account authentication for Service Bus",
-            "ServiceBusConnection__tenantId": "Required, specifies the tenant ID with Visual Studio Code account authentication for Service Bus"
-        },
         "APPLICATIONINSIGHTS_CONNECTION_STRING": "[placeholder]",
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
         "FUNCTIONS_WORKER_RUNTIME": "node",
+        "IGDB_API_ACCESS_TOKEN": "[placeholder]",
+        "IGDB_API_CLIENT_ID": "[placeholder]",
         "MONGODB_URI": "[placeholder]",
-        "ServiceBusConnection__fullyQualifiedNamespace": "[placeholder]",
-        "ServiceBusConnection__tenantId": "0c5b36ec-d351-4e12-9d18-2a6a720000dc"
+        "ServiceBusConnection": "[placeholder]",
+        "SERVICE_BUS_NAMESPACE": "[placeholder]",
+        "SERVICE_BUS_QUEUE_NAME_IGDB_API_WEBHOOK": "[placeholder]",
+        "WEBHOOK_CALLBACK_URL": "[placeholder]"
+    },
+    "Host":
+    {
+        "LocalHttpPort": [placeholder],
+        "CORS": "*",
+        "CORSCredentials": false
     }
 }
