@@ -1,6 +1,6 @@
 import APIClient from "./api-client.js";
 import { loadAPIData as loadAlternativeNamesAPIData } from "../services/igdb-api-alternative-names-logic.js"; 
-import { getWebhookRegistrations } from "../services/webhook-registration-logic.js";
+import { getWebhookRegistrations } from "../services/igdb-api-webhook-registration-logic.js";
 
 export const APIRequestMetadata =
 {
