@@ -2,34 +2,61 @@ import APIClient from "./api-client.js";
 import { loadAPIData as loadAlternativeNamesAPIData } from "../services/igdb-api-alternative-names-logic.js"; 
 import { getWebhookRegistrations } from "../services/igdb-api-webhook-registration-logic.js";
 
-export const APIRequestMetadata =
+const formatAggregateProject = (fields) =>
 {
-    baseURL: "https://api.igdb.com/v4",
-    headerProperties:
+    const project =
     {
-        "Client-ID": process.env.IGDB_API_CLIENT_ID,
-        "Authorization": `Bearer ${process.env.IGDB_API_ACCESS_TOKEN}`
-    },
-    bodyProperties:
-    {
-        fields: "*",
-        limit: 500,
-        offset: 0,
-        sort: "id"
-    }
+        _id: 0,
+        igdb_id: 1,
+        active: 1
+    };
+
+    for (const currentField of fields)
+        project[currentField] = 1;
+
+    return project;
 };
 
-export const executeAPIRequest = async (requestMetadata, endpoint) => await APIClient
-(
-    `${requestMetadata["baseURL"]}/${endpoint}`,
+export const formatAggregateCurrentActiveByIGDBID = (first, last, fields) =>
+[
     {
-        method: "POST",
-        headers:
+        $match:
         {
-            ...requestMetadata["headerProperties"],
-            "Content-Type": "text/plain"
-        },
-        body: Object.entries(requestMetadata["bodyProperties"]).map(([ key, value ]) => `${key} ${value};`).join("\n")
+            igdb_id:
+            {
+                $lte: last,
+                $gte: first
+            }
+        }
+    },
+    {
+        $setWindowFields:
+        {
+            partitionBy: "$igdb_id",
+            sortBy: { create_date: -1 },
+            output:
+            {
+                document_number: { $documentNumber: {} }
+            }
+        }
+    },
+    {
+        $match:
+        {
+            document_number: 1,
+            active: true
+        }
+    },
+    {
+        $project: formatAggregateProject(fields)
+    }
+];
+
+export const formatResponseData = (id, active) =>
+(
+    {
+        igdb_id: id,
+        active: active
     }
 );
 
@@ -153,7 +180,38 @@ export const registerWebhooks = async () =>
     }
 };
 
-export const loadAPI = () =>
+export const APIRequestMetadata =
 {
-    loadAlternativeNamesAPIData();
+    baseURL: "https://api.igdb.com/v4",
+    headerProperties:
+    {
+        "Client-ID": process.env.IGDB_API_CLIENT_ID,
+        "Authorization": `Bearer ${process.env.IGDB_API_ACCESS_TOKEN}`
+    },
+    bodyProperties:
+    {
+        fields: "*",
+        limit: 500,
+        offset: 0,
+        sort: "id"
+    }
+};
+
+export const executeAPIRequest = async (requestMetadata, endpoint) => await APIClient
+(
+    `${requestMetadata["baseURL"]}/${endpoint}`,
+    {
+        method: "POST",
+        headers:
+        {
+            ...requestMetadata["headerProperties"],
+            "Content-Type": "text/plain"
+        },
+        body: Object.entries(requestMetadata["bodyProperties"]).map(([ key, value ]) => `${key} ${value};`).join("\n")
+    }
+);
+
+export const loadAPI = async () =>
+{
+    await loadAlternativeNamesAPIData();
 };
