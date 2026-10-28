@@ -1,5 +1,6 @@
 import APIClient from "./api-client.js";
 import { loadAPIData as loadAlternativeNamesAPIData } from "../services/igdb-api-alternative-name-logic.js"; 
+import { loadAPIData as loadArtworksAPIData } from "../services/igdb-api-artwork-logic.js";
 import { getWebhookRegistrations } from "../services/igdb-api-webhook-registration-logic.js";
 
 const formatAggregateProject = (fields) =>
@@ -214,4 +215,5 @@ export const executeAPIRequest = async (requestMetadata, endpoint) => await APIC
 export const loadAPI = async () =>
 {
     await loadAlternativeNamesAPIData();
+    await loadArtworksAPIData();
 };

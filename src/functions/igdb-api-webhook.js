@@ -1,6 +1,7 @@
 import { app } from "@azure/functions";
 import { getServiceBusClient } from "../services/azure-cache.js";
-import { processWebhookData as processAlternativeNameWebhookData } from "../services/igdb-api-alternative-names-logic.js";
+import { processWebhookData as processAlternativeNameWebhookData } from "../services/igdb-api-alternative-name-logic.js";
+import { processWebhookData as processArtworkWebhookData } from "../services/igdb-api-artwork-logic.js";
 import { getWebhookRegistrationEndpointMethod } from "../services/igdb-api-webhook-registration-logic.js";
 import { getMongoDBURIClient } from "../services/mongodb-cache.js";
 import { getWebhookNotificationModel } from "../models/igdbapi/WebhookNotification.js";
@@ -104,6 +105,9 @@ const processWebhook = async (message, context) =>
 
         if (message["endpoint"] === "alternative_names")
             processAlternativeNameWebhookData(message["method"], message["data"]);
+
+        if (message["endpoint"] === "artworks")
+            processArtworkWebhookData(message["method"], message["data"]);
 
         context.log(`Successfully processed IGDB API webhook notification: ${message["endpoint"]} ${message["method"]} ${message["data"]["id"]}`);
     }
