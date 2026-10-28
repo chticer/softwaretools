@@ -1,5 +1,5 @@
 import APIClient from "./api-client.js";
-import { loadAPIData as loadAlternativeNamesAPIData } from "../services/igdb-api-alternative-names-logic.js"; 
+import { loadAPIData as loadAlternativeNamesAPIData } from "../services/igdb-api-alternative-name-logic.js"; 
 import { getWebhookRegistrations } from "../services/igdb-api-webhook-registration-logic.js";
 
 const formatAggregateProject = (fields) =>
