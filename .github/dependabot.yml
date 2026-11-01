@@ -30,6 +30,7 @@ updates:
           - "@azure/*"
           - "applicationinsights"
           - "mongoose"
+          - "randomstring"
     commit-message:
       prefix: "[npm Dependency Update]"
     open-pull-requests-limit: 10
